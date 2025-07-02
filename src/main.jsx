@@ -6,6 +6,7 @@ import { RouterProvider } from 'react-router'
 import AOS from 'aos';
 import 'aos/dist/aos.css'; 
 import AuthProvider from './context/AuthContext/AuthProvider.jsx'
+import 'leaflet/dist/leaflet.css';
 AOS.init();
 
 createRoot(document.getElementById('root')).render(

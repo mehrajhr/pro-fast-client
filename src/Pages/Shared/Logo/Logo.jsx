@@ -1,13 +1,16 @@
-import React from 'react';
-import logo from '../../../assets/logo.png'
+import React from "react";
+import logo from "../../../assets/logo.png";
+import { Link } from "react-router";
 
 const Logo = () => {
-    return (
-        <div className='flex items-end'>
-            <img className='mb-2' src={logo} alt="" />
-            <p className='font-extrabold text-3xl -ml-3'>ProFast</p>
-        </div>
-    );
+  return (
+    <Link to='/'>
+      <div className="flex items-end">
+        <img className="mb-2" src={logo} alt="" />
+        <p className="font-extrabold text-3xl -ml-3">ProFast</p>
+      </div>
+    </Link>
+  );
 };
 
 export default Logo;

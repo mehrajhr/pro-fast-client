@@ -1,11 +1,12 @@
 import React from "react";
 import { useForm } from "react-hook-form";
 import useAuth from "../../hooks/useAuth";
-import { Link } from "react-router";
+import { Link, Navigate, useNavigate } from "react-router";
 import SocialLogin from "./SocialLogin";
 
 const Register = () => {
   const { createUser } = useAuth();
+  const navigate = useNavigate();
   
   const {
     register,
@@ -19,6 +20,7 @@ const Register = () => {
     createUser(data.email , data.password)
     .then(result => {
         console.log(result.user);
+        navigate('/');
     })
     .catch(err => {
         console.log(err);
@@ -54,10 +56,7 @@ const Register = () => {
               Password is must be more than 6 charecter{" "}
             </p>
           )}
-          <div>
-            <a className="link link-hover">Forgot password?</a>
-          </div>
-          <button className="btn w-full btn-primary mt-4">Login</button>
+          <button className="btn w-full btn-primary mt-4">Register</button>
         </fieldset>
       </form>
        <p>Already have an account ? <Link to='/login' className="btn-link text-primary">Login</Link></p>

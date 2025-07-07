@@ -1,20 +1,39 @@
 import React from "react";
-import { NavLink } from "react-router";
+import { Link, NavLink } from "react-router";
 import Logo from "../Logo/Logo";
+import useAuth from "../../../hooks/useAuth";
 
 const Navbar = () => {
+  const { user , logOut } = useAuth();
+
+  const handleLogout = () =>{
+    logOut()
+    .then(res => alert('logout succesfully'))
+    .catch(err => alert(err));
+  }
+
   const navItems = (
     <>
       <li>
-        <NavLink to='/'>Home</NavLink>
+        <NavLink to="/">Home</NavLink>
       </li>
       <li>
-        <NavLink to='/coverage'>Coverage</NavLink>
+        <NavLink to="/coverage">Coverage</NavLink>
       </li>
       <li>
-        <NavLink to='/about'>About Us</NavLink>
+        <NavLink to="/about">About Us</NavLink>
       </li>
-      
+
+      {user && (
+        <>
+          <li>
+            <NavLink to="/sendParcel">Send Parcel</NavLink>
+          </li>
+          <li>
+            <NavLink to="/dashBoard">Dashboard</NavLink>
+          </li>
+        </>
+      )}
     </>
   );
   return (
@@ -50,12 +69,18 @@ const Navbar = () => {
         </a>
       </div>
       <div className="navbar-center hidden lg:flex">
-        <ul className="menu menu-horizontal px-1">
-        {navItems}
-        </ul>
+        <ul className="menu menu-horizontal px-1">{navItems}</ul>
       </div>
       <div className="navbar-end">
-        <a className="btn">Button</a>
+        {user ? (
+          <button onClick={handleLogout} className="btn btn-primary text-black">
+            Logout
+          </button>
+        ) : (
+          <Link to="/login" className="btn btn-primary text-black">
+            Login
+          </Link>
+        )}
       </div>
     </div>
   );

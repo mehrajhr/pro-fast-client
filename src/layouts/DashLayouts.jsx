@@ -1,18 +1,46 @@
 import React from "react";
 import { NavLink, Outlet } from "react-router";
 import Logo from "../Pages/Shared/Logo/Logo";
+import {
+  FiHome,
+  FiPackage,
+  FiCreditCard,
+  FiSearch,
+  FiUser,
+} from "react-icons/fi";
 
 const DashLayouts = () => {
   const links = (
     <>
       <li>
-        <NavLink to='/'><Logo></Logo></NavLink>
+        <NavLink to="/">
+          <Logo></Logo>
+        </NavLink>
       </li>
       <li>
-        <NavLink>Home</NavLink>
+        <NavLink>
+          <FiHome className="inline mr-2" /> Home
+        </NavLink>
       </li>
       <li>
-        <NavLink to='myParcels'>My Parcels</NavLink>
+        <NavLink to="myParcels">
+          <FiPackage className="inline mr-2" /> My Parcels
+        </NavLink>
+      </li>
+      <li>
+        <NavLink to="transactionHistory">
+          <FiCreditCard className="inline mr-2" /> Trnasaction History
+        </NavLink>
+      </li>
+      <li>
+        <NavLink>
+          <FiSearch className="inline mr-2" /> Track a Package
+        </NavLink>
+      </li>
+      <li>
+        <NavLink>
+          <FiUser className="inline mr-2" /> Update Profile
+        </NavLink>
       </li>
     </>
   );
@@ -56,9 +84,7 @@ const DashLayouts = () => {
         ></label>
         <ul className="menu bg-base-200 text-base-content min-h-full w-80 p-4">
           {/* Sidebar content here */}
-         {
-           links
-         }
+          {links}
         </ul>
       </div>
     </div>

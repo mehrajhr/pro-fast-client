@@ -19,7 +19,7 @@ const ActiveRiders = () => {
     return <Loading></Loading>;
   }
 
-  const handleReject = (id) => {
+  const handleReject = (id , email) => {
     Swal.fire({
       title: "Are you sure?",
       text: "This rider will be rejected!",
@@ -30,7 +30,7 @@ const ActiveRiders = () => {
       confirmButtonText: "Yes, reject!",
     }).then((result) => {
       if (result.isConfirmed) {
-        axiosSecure.patch(`/riders/status/${id}`, { status: "rejected" }).then(() => {
+        axiosSecure.patch(`/riders/status/${id}`, { status: "rejected"  , email}).then(() => {
           Swal.fire("Rejected!", "Rider has been rejected.", "success");
           refetch(); // refetch approved riders
         });
@@ -72,7 +72,7 @@ const ActiveRiders = () => {
                 <td>{rider.status}</td>
                 <td>
                   <button
-                    onClick={() => handleReject(rider._id)}
+                    onClick={() => handleReject(rider._id , rider.email)}
                     className="btn btn-sm btn-erro flex gap-2"
                   >
                     <span>❌</span> <span>Reject</span>

@@ -9,9 +9,13 @@ import {
   FiUser,
   FiClock,
   FiCheckCircle,
+  FiUserPlus,
 } from "react-icons/fi";
+import useUserRole from "../hooks/useUserRole";
 
 const DashLayouts = () => {
+  const { isAdmin, isLoading } = useUserRole();
+
   const links = (
     <>
       <li>
@@ -44,16 +48,25 @@ const DashLayouts = () => {
           <FiUser className="inline mr-2" /> Update Profile
         </NavLink>
       </li>
-      <li>
-        <NavLink to="pending-riders">
-          <FiClock className="inline mr-2" /> Pending Riders
-        </NavLink>
-      </li>
-      <li>
-        <NavLink to="active-riders">
-          <FiCheckCircle className="inline mr-2" /> Active Riders
-        </NavLink>
-      </li>
+      {!isLoading && isAdmin && (
+        <>
+          <li>
+            <NavLink to="pending-riders">
+              <FiClock className="inline mr-2" /> Pending Riders
+            </NavLink>
+          </li>
+          <li>
+            <NavLink to="active-riders">
+              <FiCheckCircle className="inline mr-2" /> Active Riders
+            </NavLink>
+          </li>
+          <li>
+            <NavLink to="make-admin">
+              <FiUserPlus className="inline mr-2" /> Make Admin
+            </NavLink>
+          </li>
+        </>
+      )}
     </>
   );
   return (

@@ -24,7 +24,7 @@ const PendingRiders = () => {
     return <Loading></Loading>;
   }
 
-  const handleDecision = (riderId, decision) => {
+  const handleDecision = (riderId, decision , email) => {
     const actionText = decision === "approved" ? "Approve" : "Reject";
 
     Swal.fire({
@@ -36,7 +36,7 @@ const PendingRiders = () => {
     }).then((result) => {
       if (result.isConfirmed) {
         axiosSecure
-          .patch(`/riders/status/${riderId}`, { status: decision })
+          .patch(`/riders/status/${riderId}`, { status: decision , email})
           .then((res) => {
             if (res.data.modifiedCount > 0) {
               refetch();
@@ -100,14 +100,14 @@ const PendingRiders = () => {
                   <td>{new Date(rider.created_at).toLocaleString()}</td>
                   <td className="space-x-2 flex gap-3">
                     <button
-                      onClick={() => handleDecision(rider._id, "approved")}
+                      onClick={() => handleDecision(rider._id, "approved" , rider.email)}
                       className="btn btn-sm btn-success tooltip"
                       data-tip="Approve"
                     >
                       <FaCheck />
                     </button>
                     <button
-                      onClick={() => handleDecision(rider._id, "rejected")}
+                      onClick={() => handleDecision(rider._id, "rejected" , rider.email)}
                       className="btn btn-sm btn-error tooltip"
                       data-tip="Reject"
                     >

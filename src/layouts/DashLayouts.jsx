@@ -7,6 +7,8 @@ import {
   FiCreditCard,
   FiSearch,
   FiUser,
+  FiClock,
+  FiCheckCircle,
 } from "react-icons/fi";
 
 const DashLayouts = () => {
@@ -33,13 +35,23 @@ const DashLayouts = () => {
         </NavLink>
       </li>
       <li>
-        <NavLink>
+        <NavLink to="track">
           <FiSearch className="inline mr-2" /> Track a Package
         </NavLink>
       </li>
       <li>
         <NavLink>
           <FiUser className="inline mr-2" /> Update Profile
+        </NavLink>
+      </li>
+      <li>
+        <NavLink to="pending-riders">
+          <FiClock className="inline mr-2" /> Pending Riders
+        </NavLink>
+      </li>
+      <li>
+        <NavLink to="active-riders">
+          <FiCheckCircle className="inline mr-2" /> Active Riders
         </NavLink>
       </li>
     </>

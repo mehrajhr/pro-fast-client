@@ -11,6 +11,10 @@ import DashLayouts from "../layouts/DashLayouts";
 import MyParcels from "../Pages/DashBoard/MyParcels";
 import Payment from "../Pages/DashBoard/Payment";
 import TransactionHistory from "../Pages/DashBoard/TransactionHistory";
+import TrackParcel from "../Pages/DashBoard/TrackParcel";
+import BeARider from "../Pages/BeARider/BeARider";
+import PendingRiders from "../Pages/DashBoard/PendingRiders";
+import ActiveRiders from "../Pages/DashBoard/ActiveRiders";
 
 export const router = createBrowserRouter([
   {
@@ -28,6 +32,10 @@ export const router = createBrowserRouter([
       {
         path: '/sendParcel',
         element: <PrivateRoutes><SendParcel></SendParcel></PrivateRoutes>
+      },
+      {
+        path : 'beARider',
+        element : <PrivateRoutes><BeARider></BeARider></PrivateRoutes>
       }
     ]
   },
@@ -60,6 +68,18 @@ export const router = createBrowserRouter([
       {
         path: 'transactionHistory',
         Component: TransactionHistory
+      },
+      {
+        path: 'track',
+        Component: TrackParcel
+      },
+      {
+        path: 'pending-riders',
+        Component: PendingRiders
+      },
+      {
+        path: 'active-riders',
+        Component: ActiveRiders
       }
     ]
   }

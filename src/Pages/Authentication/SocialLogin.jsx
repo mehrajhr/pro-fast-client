@@ -1,27 +1,43 @@
 import React from "react";
 import useAuth from "../../hooks/useAuth";
 import { useLocation, useNavigate } from "react-router";
+import useAxios from "../../hooks/useAxios";
 
 const SocialLogin = () => {
-    const {signInGoogle} = useAuth();
-    const location = useLocation();
-    const from = location.state?.from || '/';
-    const navigate = useNavigate();
+  const { signInGoogle } = useAuth();
+  const location = useLocation();
+  const from = location.state?.from || "/";
+  const navigate = useNavigate();
+  const axiosInstance = useAxios();
 
-    const handleLogin = () => {
-        signInGoogle()
-        .then(result => {
-            console.log(result.user);
-            navigate(from);
-        })
-        .catch(err => {
-            console.log(err);
-        })
-    }
+  const handleLogin = () => {
+    signInGoogle()
+      .then(async (result) => {
+        console.log(result.user);
+        const user = result?.user;
+        const userInfo = {
+          email: user.email,
+          role: "user",
+          created_at: new Date().toISOString(),
+          last_login: new Date().toISOString(),
+        };
+
+        const userInsertRes = await axiosInstance.post("/users", userInfo);
+        console.log(userInsertRes.data);
+
+        navigate(from);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
   return (
     <div>
       <div className="divider">OR</div>
-      <button onClick={handleLogin} className="btn bg-primary w-full text-black border-[#e5e5e5]">
+      <button
+        onClick={handleLogin}
+        className="btn bg-primary w-full text-black border-[#e5e5e5]"
+      >
         <svg
           aria-label="Google logo"
           width="16"
